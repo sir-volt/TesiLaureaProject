@@ -5,5 +5,6 @@ ThisBuild / scalaVersion := "3.1.1"
 lazy val root = (project in file("."))
   .settings(
     name := "TesiLaureaProject",
-    libraryDependencies += "com.github.sbt" % "junit-interface" % "0.13.3" % Test
+    libraryDependencies += "com.github.sbt" % "junit-interface" % "0.13.3" % Test,
+    libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.3.10"
 )
