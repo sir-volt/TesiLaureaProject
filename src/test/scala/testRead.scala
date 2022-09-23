@@ -22,7 +22,8 @@ class testRead {
      */
     val series = new XYSeries("f(x) = sin(x)")
     val chart = XYLineChart(series)
-    chart.show()
+    chart.show(title = "My Chart of Some Points")
+    //chart.saveAsPNG("/src/test/chart.png") non funziona (anche se questo è al momento tutte le info che ho trovato riguardo il salvataggio in un .PNG del chart)
     for (xi <- elements(1).min.map(el => el.toInt).min to elements(1).max.map(el => el.toInt).max) {
       swing.Swing onEDT {
         val x = xi * 0.5
