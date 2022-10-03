@@ -15,20 +15,28 @@ import scala.collection.mutable.ListBuffer
   }*/
 
 
-class ReadFile {
-  def readAll(): List[List[List[String]]] =
-    val allFilesPaths = getListOfFiles("src/main/resources")
-    val allFilesValues = new ListBuffer[List[List[String]]]
+class ReadFiles {
+
+  def readAll(dir: String): List[List[List[Double]]] =
+    val allFilesPaths = getListOfFiles(dir)
+    val allFilesValues = new ListBuffer[List[List[Double]]]
     for el <- allFilesPaths do allFilesValues += read(el)
     allFilesValues.toList
+      /*
+      val allFilesPaths = getListOfFiles("src/main/resources")
+      allFilesPaths match
+        case allFilesPaths.startsWith("int",0) =>
+      val allFilesValues = new ListBuffer[List[List[String]]]
+      for el <- allFilesPaths do allFilesValues += read(el)
+      allFilesValues.toList*/
 
-
-
-  def read(el: File): List[List[String]] =
+  def read(el: File): List[List[Double]] =
     val reader: CSVReader = CSVReader.open(el)
-    val elements: List[List[String]] = reader.all() //legge tutte le righe e crea una List di List
+    val elements = reader.all().map(line => line.map(el => el.toDouble))//legge tutte le righe e crea una List di List
     reader.close()
     elements
+
+  //def increment(elements: )
 
 
 
@@ -40,5 +48,4 @@ class ReadFile {
       List[File]()
     }
   }
-
 }

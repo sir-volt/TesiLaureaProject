@@ -6,7 +6,7 @@ class testRead {
   @Test
   def testReadCVS() = {
 
-    val elements = new ReadFile().readAll()
+    val elements = new ReadFiles().readAll("src/main/resources/intcsv")
     println(elements)
     //assertTrue(List("ciao", "ragazzi") == elements(0))
     //assertTrue(List("sono", "Andrea") == elements(1))
@@ -16,10 +16,12 @@ class testRead {
     println(elements(1).min.map(el => el.toInt).min)
 
 
+
     /*
      * tramite questo codice mostro su grafico i valori della funziona f = sin(x) partendo dal valore più piccolo della seconda riga di test1
      * fino al valore più grande della prima riga di test1 ( è ancora tutto molto da sistemare, ma almeno vediamo che siamo in grado di graficare con animazione)
      */
+
     val series = new XYSeries("f(x) = sin(x)")
     val chart = XYLineChart(series)
     chart.show(title = "My Chart of Some Points")
@@ -29,7 +31,9 @@ class testRead {
         val x = xi * 0.5
         series.add(x, math.sin(x))
       }
-      Thread.sleep(150)
+      Thread.sleep(1000)
     }
+    chart.saveAsPNG("/src/test/chart.png")
   }
+
 }
