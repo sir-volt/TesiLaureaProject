@@ -6,7 +6,7 @@ class testRead {
   @Test
   def testReadCVS() = {
 
-    val elements = new ReadFiles().readAll("src/main/resources/intcsv")
+    val elements = new ReadFiles().readAll("src/main/resources/csvFiles")
     println(elements)
     //assertTrue(List("ciao", "ragazzi") == elements(0))
     //assertTrue(List("sono", "Andrea") == elements(1))
