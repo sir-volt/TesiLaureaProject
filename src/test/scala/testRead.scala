@@ -33,7 +33,7 @@ class testRead {
       }
       Thread.sleep(1000)
     }
-    chart.saveAsPNG("/src/test/chart.png")
+    chart.saveAsPNG("/src/test/plots/chart.png")
   }
 
 }
