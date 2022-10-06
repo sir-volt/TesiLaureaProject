@@ -32,19 +32,15 @@ class ReadFiles {
 
   def read(el: File): List[List[Double]] =
     val reader: CSVReader = CSVReader.open(el)
-    val elements = reader.all().map(line => line.map(el => {
-      if checkIfDouble(el) then
-        el.toInt
-      else
-        el.b
-    }))//legge tutte le righe e crea una List di List
+    val elements = reader.all().map(line => line.filter(el => !(el.contains("#")))).map(line => line.map(el => el.toDouble))//legge tutte le righe e crea una List di List
     reader.close()
     elements
 
-    def checkIfDouble(str: String): Boolean =
+  def increment(elements: List[List[Double]], inc: Double): List[List[Double]] =
+    elements.map(line => line.map(el => el + inc))
 
-
-  //def increment(elements: )
+  def decrement(elements: List[List[Double]], dec: Double): List[List[Double]] =
+    elements.map(line => line.map(el => el - dec))
 
 
 

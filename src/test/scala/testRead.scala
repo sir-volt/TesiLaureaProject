@@ -6,16 +6,19 @@ class testRead {
   @Test
   def testReadCVS() = {
 
-    val elements = new ReadFiles().readAll("src/main/resources/csvFiles")
+    val fileReader = new ReadFiles()
+    val elements = fileReader.readAll("src/main/resources/intcsv")
     println(elements)
-    //assertTrue(List("ciao", "ragazzi") == elements(0))
-    //assertTrue(List("sono", "Andrea") == elements(1))
-    //assertTrue(List(List))
 
-    /* metodo al momento brutto per convertire quanto trovare tutto in int e trovare il minimo*/
-    println(elements(1).min.map(el => el.toInt).min)
+    /* metodo al momento brutto per convertire quanto trovare trovare la minima lista (riga con valori minimi) in un file*/
+    println(elements(1).min)
 
 
+    val incrementTest = fileReader.increment(elements(1), 5)
+    println(incrementTest)
+
+    val decrementTest = fileReader.decrement(elements(0), 1.2)
+    println(decrementTest)
 
     /*
      * tramite questo codice mostro su grafico i valori della funziona f = sin(x) partendo dal valore più piccolo della seconda riga di test1
@@ -33,7 +36,8 @@ class testRead {
       }
       Thread.sleep(1000)
     }
-    chart.saveAsPNG("/src/test/chart.png")
+    /*ancora il salvataggio non funziona (UNICO METODO INDICATO DA SCISS.CHART)*/
+    chart.saveAsPNG("src/test/plots/chart.png")
   }
 
 }
