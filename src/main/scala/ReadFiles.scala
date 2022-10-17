@@ -14,6 +14,10 @@ import scala.collection.mutable.ListBuffer
     bufferedSource.close
   }*/
 
+implicit object CustomCSVFormat extends DefaultCSVFormat {
+  override val delimiter: Char = ' '
+}
+
 
 class ReadFiles {
 
@@ -47,7 +51,7 @@ class ReadFiles {
   def getListOfFiles(dir: String):List[File] = {
     val d = new File(dir)
     if (d.exists && d.isDirectory) {
-      d.listFiles.filter(_.isFile).toList
+      d.listFiles.filter(_.isFile).filter(_.getName.endsWith(".csv")).toList
     } else {
       List[File]()
     }
