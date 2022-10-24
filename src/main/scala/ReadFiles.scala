@@ -21,11 +21,11 @@ implicit object CustomCSVFormat extends DefaultCSVFormat {
 
 class ReadFiles {
 
-  def readAll(dir: String): List[List[List[Double]]] =
+  def readAll(dir: String): collection.mutable.Map[String,List[List[Double]]] =
     val allFilesPaths = getListOfFiles(dir)
-    val allFilesValues = new ListBuffer[List[List[Double]]]
-    for el <- allFilesPaths do allFilesValues += read(el)
-    allFilesValues.toList
+    val allFilesValues:collection.mutable.Map[String,List[List[Double]]] = collection.mutable.Map()
+    for el <- allFilesPaths do allFilesValues.addOne(el.getName,read(el))
+    allFilesValues
       /*
       val allFilesPaths = getListOfFiles("src/main/resources")
       allFilesPaths match
@@ -37,17 +37,17 @@ class ReadFiles {
   def read(el: File): List[List[Double]] =
     val reader: CSVReader = CSVReader.open(el)
     val elements = new ListBuffer[List[String]]
-    //elements.foreach(line => line.filter(str => !(str.contains('#'))))
     val iter = reader.iterator
     while iter.hasNext do
       val line = iter.next()
       if !(line.head.contains('#')) && !(line.isEmpty) then
         elements += line.toList.filter(str => !(str.isEmpty))
-    //elements.filter(line => !(line.exists(p => p.contains('#'))))
-    //println(elements)
-    val x = elements.toList.map(line => line.map(el => el.toDouble))//legge tutte le righe e crea una List di List
     reader.close()
-    x
+    elements.toList.map(line => line.map(el => el.toDouble))//legge tutte le righe e crea una List di List
+
+  //elements.filter(line => !(line.exists(p => p.contains('#'))))
+  //println(elements)
+  //elements.foreach(line => line.filter(str => !(str.contains('#'))))
 
   def increment(elements: List[List[Double]], inc: Double): List[List[Double]] =
     elements.map(line => line.map(el => el + inc))
@@ -55,12 +55,21 @@ class ReadFiles {
   def decrement(elements: List[List[Double]], dec: Double): List[List[Double]] =
     elements.map(line => line.map(el => el - dec))
 
+/*
+  def averageHead(elements: List[List[List[Double]]]): List[Double] =
+    val averageHead = new ListBuffer[List[Double]]
+
+    for (file <- elements) {
+      averageHead += file.head
+    }*/
+
+  //ES: prendi tutte le prime righe di tutti i file, somma tutti i valori e dividi per tutti i numeri
 
 
   def getListOfFiles(dir: String):List[File] = {
     val d = new File(dir)
     if (d.exists && d.isDirectory) {
-      d.listFiles.filter(_.isFile).filter(_.getName.endsWith(".txt")).toList
+      d.listFiles.filter(_.isFile).filter(file => file.getName.endsWith(".txt") || file.getName.endsWith(".csv")).toList
     } else {
       List[File]()
     }

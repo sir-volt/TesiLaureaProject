@@ -11,13 +11,15 @@ class testRead {
     //println(elements)
 
     /* metodo al momento brutto per convertire quanto trovare trovare la minima lista (riga con valori minimi) in un file*/
-    println(elements(1).min)
+    println(elements("casestudy_random-0.0.txt").min)
 
-
-    val incrementTest = fileReader.increment(elements(1), 5)
+    println("valori iniziali")
+    println(elements("casestudy_random-0.0.txt"))
+    println("valori incrementati di 5")
+    val incrementTest = fileReader.increment(elements("casestudy_random-0.0.txt"), 5)
     println(incrementTest)
-
-    val decrementTest = fileReader.decrement(elements(0), 1.2)
+    println("valori decrementati di 1.2")
+    val decrementTest = fileReader.decrement(elements("casestudy_random-0.0.txt"), 1.2)
     println(decrementTest)
 
     /*
@@ -28,15 +30,15 @@ class testRead {
     val series = new XYSeries("f(x) = sin(x)")
     val chart = XYLineChart(series)
     chart.show(title = "My Chart of Some Points")
-    //chart.saveAsPNG("/src/test/chart.png") non funziona (anche se questo è al momento tutte le info che ho trovato riguardo il salvataggio in un .PNG del chart)
-    for (xi <- elements(1).min.map(el => el.toInt).min to elements(1).max.map(el => el.toInt).max) {
+    for (xi <- elements("casestudy_random-0.0.txt").min.map(el => el.toInt).min to elements("casestudy_random-0.0.txt").max.map(el => el.toInt).max) {
       swing.Swing onEDT {
         val x = xi * 0.5
         series.add(x, math.sin(x))
       }
       Thread.sleep(10)
     }
-    /*ancora il salvataggio non funziona (UNICO METODO INDICATO DA SCISS.CHART)*/
+    //ancora il salvataggio non funziona (UNICO METODO INDICATO DA SCISS.CHART)
+    //errore segnalato da IntelliJ: chart.png non esiste, eppure dovrebbe essere saveAsPNG che dovrebbe crearlo
     chart.saveAsPNG("src/test/plots/chart.png")
 
   }
