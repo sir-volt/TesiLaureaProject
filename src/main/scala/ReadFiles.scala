@@ -36,9 +36,18 @@ class ReadFiles {
 
   def read(el: File): List[List[Double]] =
     val reader: CSVReader = CSVReader.open(el)
-    val elements = reader.all().map(line => line.filter(el => !(el.contains("#")))).map(line => line.map(el => el.toDouble))//legge tutte le righe e crea una List di List
+    val elements = new ListBuffer[List[String]]
+    //elements.foreach(line => line.filter(str => !(str.contains('#'))))
+    val iter = reader.iterator
+    while iter.hasNext do
+      val line = iter.next()
+      if !(line.head.contains('#')) && !(line.isEmpty) then
+        elements += line.toList.filter(str => !(str.isEmpty))
+    //elements.filter(line => !(line.exists(p => p.contains('#'))))
+    //println(elements)
+    val x = elements.toList.map(line => line.map(el => el.toDouble))//legge tutte le righe e crea una List di List
     reader.close()
-    elements
+    x
 
   def increment(elements: List[List[Double]], inc: Double): List[List[Double]] =
     elements.map(line => line.map(el => el + inc))
@@ -51,7 +60,7 @@ class ReadFiles {
   def getListOfFiles(dir: String):List[File] = {
     val d = new File(dir)
     if (d.exists && d.isDirectory) {
-      d.listFiles.filter(_.isFile).filter(_.getName.endsWith(".csv")).toList
+      d.listFiles.filter(_.isFile).filter(_.getName.endsWith(".txt")).toList
     } else {
       List[File]()
     }

@@ -8,13 +8,12 @@ class testRead {
 
     val fileReader = new ReadFiles()
     val elements = fileReader.readAll("src/main/resources/csvFiles")
-    println(elements)
+    //println(elements)
 
     /* metodo al momento brutto per convertire quanto trovare trovare la minima lista (riga con valori minimi) in un file*/
-    /*
-    println(elements(1).min)*/
+    println(elements(1).min)
 
-    /*
+
     val incrementTest = fileReader.increment(elements(1), 5)
     println(incrementTest)
 
@@ -35,10 +34,10 @@ class testRead {
         val x = xi * 0.5
         series.add(x, math.sin(x))
       }
-      Thread.sleep(1000)
+      Thread.sleep(10)
     }
     /*ancora il salvataggio non funziona (UNICO METODO INDICATO DA SCISS.CHART)*/
     chart.saveAsPNG("src/test/plots/chart.png")
-    */
+
   }
 }
