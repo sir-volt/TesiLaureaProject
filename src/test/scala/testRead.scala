@@ -37,9 +37,6 @@ class testRead {
       }
       Thread.sleep(10)
     }
-    //ancora il salvataggio non funziona (UNICO METODO INDICATO DA SCISS.CHART)
-    //errore segnalato da IntelliJ: chart.png non esiste, eppure dovrebbe essere saveAsPNG che dovrebbe crearlo
     chart.saveAsPNG("src/test/plots/chart.png")
-
   }
 }

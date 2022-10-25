@@ -89,7 +89,5 @@ contained inside one of the given files, and animate a chart using this code:
 ```
 The last thing we try to do is save the created chart using `saveAsPNG`:
 ```
-  //ancora il salvataggio non funziona (UNICO METODO INDICATO DA SCISS.CHART)
-  //errore segnalato da IntelliJ: chart.png non esiste, eppure dovrebbe essere saveAsPNG che dovrebbe crearlo
   chart.saveAsPNG("src/test/plots/chart.png")
 ```
