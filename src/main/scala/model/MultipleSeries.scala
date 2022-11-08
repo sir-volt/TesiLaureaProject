@@ -1,7 +1,9 @@
 package model
 
-/* Container of Series*/
-trait MultipleSeries[T, Y <: Product] extends Series[T, Y]
+import scala.collection.immutable.LinearSeq
+
+/* Container of Series.scala*/
+trait MultipleSeries[T, Y, L <: LinearSeq[Y]] extends TimeSeries[T, L]
 
 
 

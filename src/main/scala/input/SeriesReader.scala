@@ -1,7 +1,7 @@
 package input
 
-import model.Series
+import model.TimeSeries
 
-trait SeriesReader[S <: Series[_, _]] {
+trait SeriesReader[S <: TimeSeries[_, _]] {
   def read : S
 }
